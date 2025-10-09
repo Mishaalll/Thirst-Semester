@@ -54,7 +54,7 @@ int main()
         printmyData(student[i]);
     }
 
-    printf("Sorted students by birth date: \n");
+    printf("Sorted students by birth year: \n");
     printmyData(student[max]);
     printmyData(student[mid]);
     printmyData(student[min]);
@@ -86,8 +86,7 @@ int main()
         {
             studentnew[i].name = malloc(50 * sizeof(char));
 
-            scanf("%d %49s %d %9s %d %d %d",&studentnew[i].age, studentnew[i].name, &studentnew[i].year, studentnew[i].course, &studentnew[i].bdate.day,
-                  &studentnew[i].bdate.year);
+            scanf("%d %49s %d %9s %d %d %d",&studentnew[i].age, studentnew[i].name, &studentnew[i].year, studentnew[i].course, &studentnew[i].bdate.day, &studentnew[i].bdate.year);
         }
 
         printf("New students structure: \n");
