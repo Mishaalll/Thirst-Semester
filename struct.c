@@ -17,6 +17,7 @@ struct myData
 };
 
 void printmyData(struct myData stud);
+int sortbirth(struct birthdate a, struct birthdate b);
 
 int main()
 {
@@ -27,7 +28,7 @@ int main()
     mystrcpy(student[0].course, "PX-24");
     student[0].bdate.day = 18;
     student[0].bdate.month = 8;
-    student[0].bdate.year = 2001;
+    student[0].bdate.year = 2008;
 
     student[1].age = 18;
     student[1].name = "Zhytomer";
@@ -35,7 +36,7 @@ int main()
     mystrcpy(student[1].course, "PX-24");
     student[1].bdate.day = 20;
     student[1].bdate.month = 9;
-    student[1].bdate.year = 2000;
+    student[1].bdate.year = 2007;
 
     student[2].age = 19;
     student[2].name = "Gosha";
@@ -47,17 +48,18 @@ int main()
 
     int ind[3] = {0, 1, 2};
     for (int i = 0; i < 3; i++)
+    {
         for (int j = i + 1; j < 3; j++)
         {
-            struct myData a = student[ind[i]];
-            struct myData b = student[ind[j]];
-            if (a.bdate.year > b.bdate.year || (a.bdate.year == b.bdate.year && a.bdate.month > b.bdate.month) || (a.bdate.year == b.bdate.year && a.bdate.month == b.bdate.month && a.bdate.day > b.bdate.day))
+            if (sortbirth(student[ind[i]].bdate, student[ind[j]].bdate) > 0)
             {
                 int temp = ind[i];
                 ind[i] = ind[j];
                 ind[j] = temp;
             }
         }
+    }
+
 
     printf("Students: \n");
     for (int i = 0; i < 3; i++)
@@ -123,4 +125,17 @@ void printmyData(struct myData stud)
     printf("Age: %d\nName: %s\nYear: %d\nCourse: %s\nBirthdate: %d/%d/%d\n\n",
            stud.age, stud.name, stud.year, stud.course,
            stud.bdate.day, stud.bdate.month, stud.bdate.year);
+}
+
+int sortbirth(struct birthdate a, struct birthdate b)
+{
+    if (a.year != b.year) 
+    {
+        return a.year - b.year;
+    }    
+    if (a.month != b.month) 
+    {
+        return a.month - b.month;
+    }
+    return a.day - b.day;
 }
