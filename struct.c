@@ -77,7 +77,7 @@ int main()
     if (decision == 'y')
     {
         int n;
-        printf("\n Enter how many students you want to add: ");
+        printf(" Enter how many students you want to add: \n");
         scanf(" %d", &n);
         int total = n + 3;
 
