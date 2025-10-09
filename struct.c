@@ -45,8 +45,19 @@ int main()
     student[2].bdate.month = 12;
     student[2].bdate.year = 2002;
 
-    int min, mid, max;
-    minmax(student[0].bdate.year, student[1].bdate.year, student[2].bdate.year, &min, &mid, &max);
+    int ind[3] = {0, 1, 2};
+    for (int i = 0; i < 3; i++)
+        for (int j = i + 1; j < 3; j++)
+        {
+            struct myData a = student[ind[i]];
+            struct myData b = student[ind[j]];
+            if (a.bdate.year > b.bdate.year || (a.bdate.year == b.bdate.year && a.bdate.month > b.bdate.month) || (a.bdate.year == b.bdate.year && a.bdate.month == b.bdate.month && a.bdate.day > b.bdate.day))
+            {
+                int temp = ind[i];
+                ind[i] = ind[j];
+                ind[j] = temp;
+            }
+        }
 
     printf("Students: \n");
     for (int i = 0; i < 3; i++)
@@ -54,27 +65,23 @@ int main()
         printmyData(student[i]);
     }
 
-    printf("Sorted students by birth year: \n");
-    printmyData(student[max]);
-    printmyData(student[mid]);
-    printmyData(student[min]);
+    printf("Sorted students by birth date: \n");
+    for (int i = 0; i < 3; i++)
+    {
+        printmyData(student[ind[i]]);
+    }
 
     char decision;
-    printf("Do you want to enter new students? (y/n): ");
+    printf("Do you want to enter new students? (y/n): \n");
     scanf(" %c", &decision);
     if (decision == 'y')
     {
         int n;
-        printf("\nEnter how many students you want to add: ");
-        scanf("%d", &n);
+        printf("\n Enter how many students you want to add: ");
+        scanf(" %d", &n);
         int total = n + 3;
 
         struct myData *studentnew = malloc(total * sizeof(struct myData));
-        if (!studentnew)
-        {
-            fprintf(stderr, "Memory allocation failed\n");
-            return 1;
-        }
 
         for (int i = 0; i < 3; i++)
         {
@@ -85,8 +92,14 @@ int main()
         for (int i = 3; i < total; i++)
         {
             studentnew[i].name = malloc(50 * sizeof(char));
-
-            scanf("%d %49s %d %9s %d %d %d",&studentnew[i].age, studentnew[i].name, &studentnew[i].year, studentnew[i].course, &studentnew[i].bdate.day, &studentnew[i].bdate.year);
+            scanf("%d %49s %d %9s %d %d %d",
+                  &studentnew[i].age,
+                  studentnew[i].name,
+                  &studentnew[i].year,
+                  studentnew[i].course,
+                  &studentnew[i].bdate.day,
+                  &studentnew[i].bdate.month,
+                  &studentnew[i].bdate.year);
         }
 
         printf("New students structure: \n");
@@ -94,7 +107,6 @@ int main()
         {
             printmyData(studentnew[i]);
         }
-
 
         for (int i = 3; i < total; i++)
         {
