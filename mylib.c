@@ -30,22 +30,24 @@ int myatoi(const char* a)
     return atoi(a);
 }
 
-void printmyData(struct myData stud)
-{
-    printf("Age: %d\nName: %s\nYear: %d\nCourse: %s\nBirthdate: %d/%d/%d\n\n",
-           stud.age, stud.name, stud.year, stud.course,
-           stud.bdate.day, stud.bdate.month, stud.bdate.year);
-}
 
-int sortbirth(struct birthdate a, struct birthdate b)
+
+char *mystrcat(char *a, const char *b)
 {
-    if (a.year != b.year) 
+    int i = 0;
+    int j = 0;
+
+    while (a[i] != '\0')
+        i++;
+
+    while (b[j] != '\0')
     {
-        return a.year - b.year;
-    }    
-    if (a.month != b.month) 
-    {
-        return a.month - b.month;
+        a[i] = b[j];
+        i++;
+        j++;
     }
-    return a.day - b.day;
+
+    a[i] = '\0';
+
+    return a;
 }
