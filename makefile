@@ -5,3 +5,5 @@ struct:
 
 clean:
 	rm *.o
+	rm *.txt
+
