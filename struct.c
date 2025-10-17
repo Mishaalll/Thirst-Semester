@@ -139,7 +139,7 @@ int main()
                 database[i].bdate.year);
     }
     fclose(fp);
-    printf("Data saved to database.txt successfully!\n");
+    printf("Data saved successfully!\n");
 
     if (decision == 'y')
     {
